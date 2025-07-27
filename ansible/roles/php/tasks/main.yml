@@ -1,0 +1,3 @@
+- name: Ensure PHP deployment is running
+  command: kubectl rollout status deployment/php
+

@@ -1,0 +1,23 @@
+- hosts: localhost
+  tasks:
+    - name: Build Apache Docker Image
+      command: docker build -t custom-apache ../dockerfiles/apache
+
+    - name: Build MySQL Docker Image
+      command: docker build -t custom-mysql ../dockerfiles/mysql
+
+    - name: Build PHP Docker Image
+      command: docker build -t custom-php ../dockerfiles/php
+
+    - name: Apply Persistent Volume
+      command: kubectl apply -f ../k8s-manifests/persistent-volume.yml
+
+    - name: Deploy MySQL
+      command: kubectl apply -f ../k8s-manifests/mysql-deployment.yml
+
+    - name: Deploy Apache
+      command: kubectl apply -f ../k8s-manifests/apache-deployment.yml
+
+    - name: Deploy PHP
+      command: kubectl apply -f ../k8s-manifests/php-deployment.yml
+
